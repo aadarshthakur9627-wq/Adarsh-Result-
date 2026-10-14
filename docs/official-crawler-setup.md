@@ -17,7 +17,7 @@ This is an additive crawler for the existing Next.js + Vercel + Supabase Adarsh 
 2. Apply `supabase/migrations/20261014_official_crawler.sql` to the Adarsh Result Supabase project.
 3. Add these server-only Vercel environment variables in Preview and Production:
    - `CRON_SECRET`: a long random secret. Vercel Cron sends this as a bearer token.
-   - `SUPABASE_SERVICE_ROLE_KEY`: Supabase service-role key; server-side only, never prefix with `NEXT_PUBLIC_`.
+   - `SUPABASE_SECRET_KEY`: a Supabase secret key from Project Settings → API Keys (preferred). If using the legacy key, `SUPABASE_SECRET_KEY` or legacy `SUPABASE_SERVICE_ROLE_KEY` is also accepted. Keep it server-side only; never prefix it with `NEXT_PUBLIC_`.
 4. Ensure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` already exist.
 5. Deploy this branch as a Preview first. Sign in with an editor account and visit `/admin/crawler`.
 6. Call the cron endpoint only with the configured bearer secret; verify successful run logs and inspect each source's discovered links.
