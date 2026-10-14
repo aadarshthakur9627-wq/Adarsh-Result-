@@ -80,7 +80,7 @@ export default async function CrawlerDashboard({ searchParams }: {
       </section>
       <section className="admin-box">
         <h2>Recent crawler runs</h2><p>Monitoring history and errors.</p>
-        {!runs?.length ? <div className="admin-empty">No runs logged yet. Vercel Cron needs to be deployed and configured.</div> : <div className="admin-post-list">{(runs as Run[]).map((run) => <article className="admin-post" key={run.id}>
+        {!runs?.length ? <div className="admin-empty">No crawler runs are recorded yet. Vercel Cron runs on Production deployments, not this Preview URL. Check run history after the crawler is deployed to Production, or use an authorised manual test.</div> : <div className="admin-post-list">{(runs as Run[]).map((run) => <article className="admin-post" key={run.id}>
           <div className="admin-post-top"><span className="admin-badge">{run.status}</span><span className="admin-badge">{run.sources_checked} sources</span></div>
           <p>{new Intl.DateTimeFormat("en-IN", { dateStyle:"medium", timeStyle:"short" }).format(new Date(run.started_at))}</p>
           <p style={{marginTop:5}}>New links saved: {run.discoveries_created}</p>
@@ -88,6 +88,6 @@ export default async function CrawlerDashboard({ searchParams }: {
         </article>)}</div>}
       </section>
     </div>
-    <p className="admin-footnote">Scheduled frequency: hourly. Add <code>CRON_SECRET</code> and server-only <code>SUPABASE_SECRET_KEY</code> (or legacy <code>SUPABASE_SERVICE_ROLE_KEY</code>) to Vercel environment variables before enabling production crawling.</p>
+    <p className="admin-footnote">Scheduled frequency: once daily on the current Vercel Hobby plan. Vercel Cron runs on Production deployments; this Preview URL will not run the scheduled job. Add <code>CRON_SECRET</code> and server-only <code>SUPABASE_SECRET_KEY</code> (or legacy <code>SUPABASE_SERVICE_ROLE_KEY</code>) to Vercel environment variables before enabling production crawling.</p>
   </main>;
 }
