@@ -10,3 +10,5 @@
 .submit-spinner{width:15px;height:15px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;animation:submit-spin .7s linear infinite}
 @keyframes submit-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.submit-spinner{animation-duration:1.5s}}
+
+.admin-error{margin:14px 0;padding:13px 15px;border:1px solid #f1b8b8;border-radius:10px;background:#fff0f0;color:#9f2020;font-size:14px;line-height:1.5}
