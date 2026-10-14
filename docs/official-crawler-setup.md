@@ -9,7 +9,7 @@ This is an additive crawler for the existing Next.js + Vercel + Supabase Adarsh 
 - Stores candidate links in `crawler_discoveries`; it does **not** publish them.
 - Logs source health and every run in Supabase.
 - Provides `/admin/crawler` for authenticated editors/admins to convert candidates to drafts or dismiss them.
-- Schedules the endpoint hourly through `vercel.json`.
+- Schedules the endpoint once per day through `vercel.json` to stay compatible with the current Vercel Hobby plan.
 
 ## Deployment checklist
 
@@ -29,4 +29,4 @@ This is an additive crawler for the existing Next.js + Vercel + Supabase Adarsh 
 - Government sites vary in markup and may use JavaScript, CAPTCHAs, PDF-only notices, or access controls. Failed sources are logged and require source-specific adapters.
 - Only convert a discovery to a draft after opening the official link. Verify the PDF, dates, eligibility, fees and application link before publishing.
 - Respect each site's robots.txt, terms, rate limits and published access guidance. Do not bypass CAPTCHAs or access controls.
-- The initial schedule is hourly to remain conservative and reduce unnecessary requests.
+- The initial schedule is daily because Vercel Hobby allows only one Cron run per day. For hourly or 30-minute checks, use a compatible paid plan or an external scheduler.
