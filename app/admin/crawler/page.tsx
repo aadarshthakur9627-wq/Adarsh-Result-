@@ -88,6 +88,6 @@ export default async function CrawlerDashboard({ searchParams }: {
         </article>)}</div>}
       </section>
     </div>
-    <p className="admin-footnote">Scheduled frequency: hourly. Add <code>CRON_SECRET</code> and server-only <code>SUPABASE_SERVICE_ROLE_KEY</code> to Vercel environment variables before enabling production crawling.</p>
+    <p className="admin-footnote">Scheduled frequency: hourly. Add <code>CRON_SECRET</code> and server-only <code>SUPABASE_SECRET_KEY</code> (or legacy <code>SUPABASE_SERVICE_ROLE_KEY</code>) to Vercel environment variables before enabling production crawling.</p>
   </main>;
 }
