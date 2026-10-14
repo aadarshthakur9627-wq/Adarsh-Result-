@@ -51,7 +51,7 @@ export default async function CrawlerDashboard({ searchParams }: {
       <h2>Pending official links ({discoveries?.length ?? 0})</h2>
       <p>The crawler identifies candidate links from configured government pages. It does not certify that a vacancy is genuine or extract verified dates yet.</p>
       {discoveryError ? <p className="admin-error">Crawler tables are not ready. Apply <code>supabase/migrations/20261014_official_crawler.sql</code> to the Adarsh Result Supabase project first.</p> : null}
-      {!discoveryError && !discoveries?.length ? <div className="admin-empty">No pending links yet. Once the hourly scheduled crawler runs successfully, detected notices will appear here.</div> : null}
+      {!discoveryError && !discoveries?.length ? <div className="admin-empty">No pending links yet. Once the daily scheduled crawler runs successfully, detected notices will appear here.</div> : null}
       <div className="admin-post-list">
         {(discoveries as Discovery[] | null)?.map((item) => <article className="admin-post" key={item.id}>
           <div className="admin-post-top"><span className="admin-badge">{item.content_type.replace("_", " ")}</span><span className="admin-badge">Pending review</span></div>
