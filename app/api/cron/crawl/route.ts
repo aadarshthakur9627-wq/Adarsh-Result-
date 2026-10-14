@@ -87,7 +87,7 @@ export async function GET(request: NextRequest) {
     try {
       const response = await fetch(source.listingUrl, {
         redirect: "follow",
-        signal: AbortSignal.timeout(12_000),
+        signal: AbortSignal.timeout(7_000),
         headers: { "user-agent": "AdarshResultBot/1.0 (+https://adarshresult.com; official-notice-monitor)", accept: "text/html,application/xhtml+xml" },
         cache: "no-store",
       });
@@ -125,23 +125,26 @@ export async function GET(request: NextRequest) {
       }, { onConflict: "listing_url" }).select("id").single();
       if (sourceUpsert.error) throw new Error(sourceUpsert.error.message);
       const links = extractLinks(html, source.listingUrl);
-      for (const link of links) {
-        const fingerprint = createHash("sha256").update(link.url).digest("hex");
-        const { data: prior, error: priorError } = await supabase.from("crawler_discoveries")
-          .select("id").eq("official_url", link.url).maybeSingle();
+      if (links.length) {
+        const urls = links.map((link) => link.url);
+        const { data: priorRows, error: priorError } = await supabase.from("crawler_discoveries")
+          .select("official_url").in("official_url", urls);
         if (priorError) throw new Error(priorError.message);
-        const { error } = await supabase.from("crawler_discoveries").upsert({
+        const previouslySeen = new Set((priorRows || []).map((row) => row.official_url));
+        const seenAt = new Date().toISOString();
+        const rows = links.map((link) => ({
           source_id: sourceUpsert.data.id,
           source_name: source.name,
           title: link.title,
           official_url: link.url,
           source_page_url: source.listingUrl,
           content_type: classify(link.title + " " + link.url),
-          fingerprint,
-          last_seen_at: new Date().toISOString(),
-        }, { onConflict: "official_url" });
+          fingerprint: createHash("sha256").update(link.url).digest("hex"),
+          last_seen_at: seenAt,
+        }));
+        const { error } = await supabase.from("crawler_discoveries").upsert(rows, { onConflict: "official_url" });
         if (error) throw new Error(error.message);
-        if (!prior) created += 1;
+        created += links.filter((link) => !previouslySeen.has(link.url)).length;
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown crawler error";
