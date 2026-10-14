@@ -70,9 +70,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const serviceKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !serviceKey) {
-    return NextResponse.json({ error: "Crawler server environment is not configured" }, { status: 500 });
+    return NextResponse.json({ error: "Crawler server environment is not configured (set SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY)" }, { status: 500 });
   }
 
   const supabase = createClient(supabaseUrl, serviceKey, {
