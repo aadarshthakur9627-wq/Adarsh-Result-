@@ -31,14 +31,17 @@ function cleanText(input: string): string {
     .replace(/&amp;/gi, "&").replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'")
     .replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/\s+/g, " ").trim().slice(0, 400);
 }
+function isApprovedHost(hostname: string, sourceHost: string): boolean {
+  const host = hostname.toLowerCase();
+  const source = sourceHost.toLowerCase();
+  const governmentHost = /\.(gov\.in|nic\.in|gov|ac\.in|edu\.in)$/.test(host) || /^(gov\.in|nic\.in)$/.test(host);
+  return host === source || governmentHost;
+}
 function allowedOfficialUrl(raw: string, sourceUrl: string): string | null {
   try {
     const url = new URL(raw, sourceUrl);
     if (url.protocol !== "https:" || url.username || url.password) return null;
-    const host = url.hostname.toLowerCase();
-    const sourceHost = new URL(sourceUrl).hostname.toLowerCase();
-    const governmentHost = /\.(gov\.in|nic\.in|gov|ac\.in|edu\.in)$/.test(host) || /^(gov\.in|nic\.in)$/.test(host);
-    if (host !== sourceHost && !governmentHost) return null;
+    if (!isApprovedHost(url.hostname, new URL(sourceUrl).hostname)) return null;
     url.hash = "";
     return url.toString();
   } catch { return null; }
@@ -90,6 +93,10 @@ export async function GET(request: NextRequest) {
       });
       checked += 1;
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const finalUrl = new URL(response.url);
+      if (finalUrl.protocol !== "https:" || !isApprovedHost(finalUrl.hostname, new URL(source.listingUrl).hostname)) {
+        throw new Error("Redirected outside the approved official domain allowlist");
+      }
       const contentType = response.headers.get("content-type") || "";
       if (!contentType.includes("text/html") && !contentType.includes("application/xhtml+xml")) {
         throw new Error(`Unsupported content type: ${contentType || "unknown"}`);
@@ -120,7 +127,10 @@ export async function GET(request: NextRequest) {
       const links = extractLinks(html, source.listingUrl);
       for (const link of links) {
         const fingerprint = createHash("sha256").update(link.url).digest("hex");
-        const { data, error } = await supabase.from("crawler_discoveries").upsert({
+        const { data: prior, error: priorError } = await supabase.from("crawler_discoveries")
+          .select("id").eq("official_url", link.url).maybeSingle();
+        if (priorError) throw new Error(priorError.message);
+        const { error } = await supabase.from("crawler_discoveries").upsert({
           source_id: sourceUpsert.data.id,
           source_name: source.name,
           title: link.title,
@@ -129,9 +139,9 @@ export async function GET(request: NextRequest) {
           content_type: classify(link.title + " " + link.url),
           fingerprint,
           last_seen_at: new Date().toISOString(),
-        }, { onConflict: "official_url", ignoreDuplicates: true }).select("id");
+        }, { onConflict: "official_url" });
         if (error) throw new Error(error.message);
-        if (data?.length) created += data.length;
+        if (!prior) created += 1;
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown crawler error";
