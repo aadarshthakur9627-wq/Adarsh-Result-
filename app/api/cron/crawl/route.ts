@@ -6,7 +6,7 @@ import { OFFICIAL_SOURCES } from "@/lib/crawler/sources";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
-const MAX_HTML_BYTES = 2_000_000;
+const MAX_HTML_BYTES = 4_000_000;
 const KEYWORDS = [
   "recruitment", "vacancy", "notification", "advertisement", "advt", "apply online",
   "application form", "admit card", "hall ticket", "result", "answer key", "answer-key",
@@ -83,11 +83,11 @@ export async function GET(request: NextRequest) {
   let created = 0;
   const errors: { source: string; message: string }[] = [];
 
-  for (const source of OFFICIAL_SOURCES) {
+  await Promise.all(OFFICIAL_SOURCES.map(async (source) => {
     try {
       const response = await fetch(source.listingUrl, {
         redirect: "follow",
-        signal: AbortSignal.timeout(7_000),
+        signal: AbortSignal.timeout(12_000),
         headers: { "user-agent": "AdarshResultBot/1.0 (+https://adarshresult.com; official-notice-monitor)", accept: "text/html,application/xhtml+xml" },
         cache: "no-store",
       });
@@ -124,7 +124,10 @@ export async function GET(request: NextRequest) {
         last_checked_at: new Date().toISOString(), last_status: "ok", last_error: null,
       }, { onConflict: "listing_url" }).select("id").single();
       if (sourceUpsert.error) throw new Error(sourceUpsert.error.message);
-      const links = extractLinks(html, source.listingUrl);
+      const extractedLinks = extractLinks(html, source.listingUrl);
+      // Some official pages repeat the same notice in multiple navigation sections.
+      // Postgres cannot upsert duplicate conflict keys from one input batch.
+      const links = [...new Map(extractedLinks.map((link) => [link.url, link])).values()];
       if (links.length) {
         const urls = links.map((link) => link.url);
         const { data: priorRows, error: priorError } = await supabase.from("crawler_discoveries")
@@ -155,7 +158,7 @@ export async function GET(request: NextRequest) {
         last_checked_at: new Date().toISOString(), last_status: "error", last_error: message.slice(0, 500),
       }, { onConflict: "listing_url" });
     }
-  }
+  }));
 
   const finishedAt = new Date().toISOString();
   const { error: runError } = await supabase.from("crawler_runs").insert({
