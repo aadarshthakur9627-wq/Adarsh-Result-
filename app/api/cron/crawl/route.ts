@@ -31,6 +31,31 @@ function cleanText(input: string): string {
     .replace(/&amp;/gi, "&").replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'")
     .replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/\s+/g, " ").trim().slice(0, 400);
 }
+
+function describeCrawlerError(error: unknown): string {
+  if (!(error instanceof Error)) return "Unknown non-Error failure";
+
+  const withCause = error as Error & { cause?: unknown; code?: unknown };
+  const cause = withCause.cause && typeof withCause.cause === "object"
+    ? withCause.cause as { name?: unknown; message?: unknown; code?: unknown }
+    : null;
+  const causeCode = typeof cause?.code === "string" ? cause.code
+    : typeof withCause.code === "string" ? withCause.code : null;
+  const causeName = typeof cause?.name === "string" ? cause.name : null;
+  const causeMessage = typeof cause?.message === "string" ? cause.message : null;
+
+  if (error.name === "TimeoutError" || error.name === "AbortError" ||
+      causeName === "TimeoutError" || causeName === "AbortError") {
+    return `Request timed out or was aborted after 12000ms${causeCode ? ` (code: ${causeCode})` : ""}`;
+  }
+
+  const details = [
+    `${error.name}: ${error.message}`,
+    causeCode ? `cause code: ${causeCode}` : null,
+    causeMessage && causeMessage !== error.message ? `cause: ${causeMessage}` : null,
+  ].filter(Boolean);
+  return details.join(" | ").slice(0, 500);
+}
 function isApprovedHost(hostname: string, sourceHost: string): boolean {
   const host = hostname.toLowerCase();
   const source = sourceHost.toLowerCase();
@@ -84,6 +109,8 @@ export async function GET(request: NextRequest) {
   const errors: { source: string; message: string }[] = [];
 
   await Promise.all(OFFICIAL_SOURCES.map(async (source) => {
+    // Count every attempted source, including DNS/TLS/connection failures before a response exists.
+    checked += 1;
     try {
       const response = await fetch(source.listingUrl, {
         redirect: "follow",
@@ -91,8 +118,7 @@ export async function GET(request: NextRequest) {
         headers: { "user-agent": "AdarshResultBot/1.0 (+https://adarshresult.com; official-notice-monitor)", accept: "text/html,application/xhtml+xml" },
         cache: "no-store",
       });
-      checked += 1;
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}${response.statusText ? ` ${response.statusText}` : ""}`);
       const finalUrl = new URL(response.url);
       if (finalUrl.protocol !== "https:" || !isApprovedHost(finalUrl.hostname, new URL(source.listingUrl).hostname)) {
         throw new Error("Redirected outside the approved official domain allowlist");
@@ -111,7 +137,7 @@ export async function GET(request: NextRequest) {
         size += value.byteLength;
         if (size > MAX_HTML_BYTES) {
           await reader.cancel();
-          throw new Error("Listing page exceeded the 2 MB safety limit");
+          throw new Error(`Listing page exceeded the ${MAX_HTML_BYTES / 1_000_000} MB safety limit`);
         }
         chunks.push(value);
       }
@@ -150,7 +176,8 @@ export async function GET(request: NextRequest) {
         created += links.filter((link) => !previouslySeen.has(link.url)).length;
       }
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Unknown crawler error";
+      const message = describeCrawlerError(error);
+      console.error("[crawler] source failed", { source: source.name, error: message });
       errors.push({ source: source.name, message });
       // Keep a source health record even if the page failed.
       await supabase.from("crawler_sources").upsert({
