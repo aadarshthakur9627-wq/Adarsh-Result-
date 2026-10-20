@@ -107,3 +107,22 @@
   .official-reminder,.notice-warning{padding:14px;border-radius:14px}
 }
 @media(prefers-reduced-motion:reduce){.notice-details>div,.notice-actions a,.back-link{transition:none}}
+
+
+/* Structured long-form exam information entered by the editor */
+.notice-document{color:#3f4963;font-size:13px;line-height:1.9;overflow-wrap:anywhere}
+.notice-document h3{margin:24px 0 12px;padding:11px 14px;border-left:5px solid #6856e8;border-radius:0 10px 10px 0;background:linear-gradient(100deg,#f0edff,#f8f6ff);color:#2b245c;font-size:16px;font-weight:850;line-height:1.45}
+.notice-document h4{margin:19px 0 9px;color:#5140b5;font-size:14px;font-weight:800}
+.notice-document p{margin:9px 0;line-height:1.9}
+.notice-document ul,.notice-document ol{margin:10px 0 18px;padding:14px 18px 14px 38px;border:1px solid #e8e7f5;border-radius:13px;background:#fff}
+.notice-document li{padding:3px 0 3px 3px}
+.notice-document li::marker{color:#6c51dc;font-weight:800}
+.notice-document a{color:#5145d5;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.notice-document strong{color:#292052;font-weight:800}
+.notice-table-wrap{width:100%;overflow-x:auto;margin:14px 0 20px;border:1px solid #e5e4f3;border-radius:13px}
+.notice-info-table{width:100%;border-collapse:collapse;min-width:300px;background:#fff;font-size:12px;line-height:1.65}
+.notice-info-table th{background:linear-gradient(110deg,#5b54e9,#8650d4);color:#fff;text-align:left;font-weight:800}
+.notice-info-table th,.notice-info-table td{padding:12px 14px;border-bottom:1px solid #ecebf5}
+.notice-info-table tr:nth-child(even) td{background:#f8f7ff}
+.notice-info-table tr:last-child td{border-bottom:0}
+@media(max-width:620px){.notice-document{font-size:12px}.notice-document h3{font-size:14px;padding:10px 11px}.notice-document ul,.notice-document ol{padding:12px 12px 12px 30px}.notice-info-table th,.notice-info-table td{padding:10px 11px}}
