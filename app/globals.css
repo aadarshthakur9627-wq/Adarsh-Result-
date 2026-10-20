@@ -80,3 +80,73 @@ body{background:#f7f8ff;color:#17203c}
 .directory-jobs .directory-more{background:#fff2eb;color:#df6c42}.directory-results .directory-more{background:#e9faf3;color:#14845f}.directory-exams .directory-more{background:#edf1ff;color:#3f62dd}
 @media(max-width:850px){.container{width:min(100% - 32px,1240px)}.directory-columns{grid-template-columns:repeat(2,minmax(0,1fr))}.directory-exams{grid-column:1/-1}.hero-copy{padding:35px 28px}}
 @media(max-width:620px){.container{width:calc(100% - 24px)}.portal-directory{padding:16px;border-radius:19px}.directory-heading{align-items:flex-start}.directory-heading h2{font-size:21px}.directory-heading p{font-size:11px;line-height:1.6}.directory-pill{font-size:9px;padding:8px}.exam-chips{gap:7px;padding-bottom:18px}.exam-chip{padding:9px 10px;font-size:10px;border-radius:9px}.directory-columns{grid-template-columns:1fr;gap:11px;margin-top:17px}.directory-exams{grid-column:auto}.directory-card-head{padding:15px}.directory-link-list{padding:6px 14px}.directory-link-list a{font-size:11px;padding:11px 0}.quick-section,.latest-section,.updates-section,.browse-section,.portal-directory{margin-top:29px}.hero{border-radius:20px}}
+
+
+/* Classic government-exam portal layout: familiar dense directory, Adarsh Result branding */
+.site-shell{background:#fff;color:#202020}
+.container{width:min(100% - 28px,1100px)}
+.announcement{background:#fff;border-bottom:1px solid #e6e6e6;color:#252525}
+.announcement-inner{min-height:32px;font-size:12px}
+.announcement-inner>span:first-child{color:#c21f35;font-weight:800}
+.announcement-right{color:#555}
+.site-header{background:#fff;border-bottom:1px solid #dedede}
+.brand-row{min-height:148px;justify-content:center;gap:24px;padding-top:12px;padding-bottom:12px}
+.brand-mark{justify-content:center;gap:18px}
+.brand-icon{width:104px;height:104px;border-radius:50%;background:linear-gradient(140deg,#c8172d,#f97316 55%,#5b45df);color:white;font-size:27px;border:5px solid #fff;outline:2px solid #c8172d;box-shadow:0 2px 8px #0002}
+.brand-title{font-family:Arial,sans-serif;font-size:clamp(30px,4vw,46px);font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:#c51d31}
+.brand-title span{color:#172554}
+.brand-subtitle{font-size:12px;letter-spacing:1.8px;font-weight:800;color:#555;margin-top:5px}
+.header-actions{display:none}
+.navbar{background:#151515;border-top:1px solid #000;border-bottom:3px solid #cf1f35;position:relative}
+.nav-inner{justify-content:center;gap:0;flex-wrap:wrap}
+.nav-inner a{color:#fff;padding:14px 17px;border-right:1px solid #444;border-radius:0;font-size:13px;font-weight:750}
+.nav-inner a:first-child{border-left:1px solid #444}
+.nav-inner a:hover{background:#c51d31;color:#fff}
+.main-content{padding-top:18px}
+.hero{background:#fff;border:1px solid #d7d7d7;border-radius:0;box-shadow:none;min-height:0;display:block;margin-bottom:18px}
+.hero-copy{padding:20px 22px;text-align:center}
+.eyebrow{justify-content:center;color:#a91e2e;font-size:11px}
+.hero h1{font-size:clamp(26px,3.4vw,38px);line-height:1.18;color:#111;letter-spacing:-.6px;margin:10px 0}
+.hero h1 span{color:#c51d31}
+.hero-copy>p{max-width:720px;margin:0 auto 15px;color:#424242;font-size:14px}
+.hero-points{justify-content:center;flex-wrap:wrap}
+.hero-visual{display:none}
+.hero-search{max-width:760px;margin:18px auto 10px;border-radius:0;border:2px solid #c51d31;box-shadow:none}
+.hero-search button{border-radius:0;background:#c51d31}
+.hero-footnote{justify-content:center}
+.quick-section,.latest-section,.updates-section,.browse-section,.portal-directory{margin-top:20px}
+.section-heading{margin-bottom:12px}
+.section-heading h2{font-size:23px;color:#111}
+.section-kicker{color:#b21d30}
+.quick-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid #d5d5d5}
+.quick-card{border-radius:0;box-shadow:none;min-height:88px;padding:16px 12px;border-right:1px solid #fff;color:#fff}
+.quick-card.jobs{background:#c91f35}.quick-card.results{background:#198754}.quick-card.admit{background:#f0a500}.quick-card.answer{background:#2456c6}
+.quick-card .quick-icon{background:#ffffff25;color:#fff}
+.quick-card h3,.quick-card p,.quick-card .quick-arrow{color:#fff}
+.quick-card:hover{transform:none;filter:brightness(.94)}
+.latest-grid{gap:16px}
+.latest-panel,.update-panel,.browse-card,.directory-card{border-radius:0;box-shadow:none;border:1px solid #d3d3d3;background:#fff}
+.panel-heading,.directory-card-head{border-radius:0;background:#f6f6f6;border-bottom:2px solid #c51d31}
+.panel-heading h3,.directory-card-head h3{color:#111}
+.panel-heading a,.panel-heading .panel-action{color:#c51d31}
+.post-list a,.directory-link-list a,.browse-card li a{border-radius:0;color:#0645ad}
+.post-list a:hover,.directory-link-list a:hover,.browse-card li a:hover{background:#fff7f7;color:#c51d31}
+.portal-directory{background:#fff;border:1px solid #d4d4d4;border-radius:0;padding:20px}
+.directory-heading h2{color:#111}
+.directory-pill{border-radius:0;background:#c51d31;color:white}
+.exam-chip{border-radius:0;border:1px solid #c51d31;color:#0645ad;background:#fff}
+.exam-chip:hover{background:#c51d31;color:#fff}
+.directory-columns{gap:14px}
+.directory-card-head{padding:14px}
+.directory-card-head .directory-icon{border-radius:0}
+.directory-more{border-radius:0}
+.trust-banner{border-radius:0;box-shadow:none;border:1px solid #ddd;background:#f8f8f8}
+.footer{background:#161616;color:#eee;border-radius:0}
+.footer a,.footer p,.footer-bottom{color:#d0d0d0}
+@media(max-width:760px){
+ .brand-row{min-height:116px}.brand-icon{width:74px;height:74px;font-size:22px}.brand-mark{gap:13px}.brand-title{font-size:29px}.brand-subtitle{font-size:9px;letter-spacing:1px}
+ .nav-inner{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%}.nav-inner a{padding:11px 5px;text-align:center;font-size:11px;border-bottom:1px solid #444}
+ .quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.quick-card{min-height:80px}
+ .hero-copy{padding:18px 12px}.hero-points{gap:8px 12px}.hero-points span{font-size:11px}
+}
+@media(max-width:420px){.brand-title{font-size:24px}.brand-subtitle{font-size:8px}.brand-icon{width:62px;height:62px}.nav-inner{grid-template-columns:repeat(2,minmax(0,1fr))}}
