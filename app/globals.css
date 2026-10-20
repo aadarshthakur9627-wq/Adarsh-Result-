@@ -150,3 +150,106 @@ body{background:#f7f8ff;color:#17203c}
  .hero-copy{padding:18px 12px}.hero-points{gap:8px 12px}.hero-points span{font-size:11px}
 }
 @media(max-width:420px){.brand-title{font-size:24px}.brand-subtitle{font-size:8px}.brand-icon{width:62px;height:62px}.nav-inner{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+/* Classic dense exam portal flow for Adarsh Result */
+.classic-portal{background:#fff;color:#171717;font-family:Arial,Helvetica,sans-serif}
+.classic-main{padding-top:0;padding-bottom:28px}
+.classic-portal .brand-row{min-height:140px;padding:16px 0;justify-content:center}
+.classic-portal .brand-mark{justify-content:center;gap:17px}
+.classic-portal .brand-icon{width:92px;height:92px;border-radius:50%;font-size:25px}
+.classic-portal .brand-title{font-size:clamp(28px,4vw,42px);font-family:Arial,Helvetica,sans-serif;letter-spacing:.4px}
+.classic-portal .brand-subtitle{font-size:11px;letter-spacing:1.1px;text-align:center}
+.classic-portal .navbar{background:#111;border-top:0;border-bottom:3px solid #c51d31}
+.classic-portal .nav-inner{justify-content:center;gap:0}
+.classic-portal .nav-inner a{border-right:1px solid #484848;border-radius:0;padding:14px 16px;font-size:13px}
+.classic-portal .nav-inner a:first-child{border-left:1px solid #484848}
+.classic-portal .nav-inner a:hover{background:#c51d31}
+.classic-ticker{display:flex;align-items:stretch;border:1px solid #ddd;margin:12px 0 0;min-height:38px;overflow:hidden}
+.classic-ticker>strong{background:#c51d31;color:#fff;padding:10px 13px;font-size:11px;white-space:nowrap;display:flex;align-items:center}
+.ticker-window{overflow:hidden;min-width:0;display:flex;align-items:center;flex:1}
+.ticker-track{display:flex;align-items:center;gap:32px;white-space:nowrap;animation:classicTicker 44s linear infinite;padding-left:16px;font-size:12px;font-weight:700;color:#0645ad}
+.ticker-track span{display:inline-flex;align-items:center;gap:7px}
+.ticker-track span::first-letter{color:#c51d31}
+.ticker-window:hover .ticker-track{animation-play-state:paused}
+@keyframes classicTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.classic-intro{text-align:center;padding:20px 12px 12px}
+.classic-intro h1{font-size:clamp(25px,3.3vw,34px);font-weight:800;margin:0 0 8px;color:#111}
+.classic-intro h1 span{color:#c51d31}
+.classic-intro p{font-size:14px;font-weight:700;line-height:1.65;margin:0 auto 15px;color:#333}
+.classic-search{display:flex;align-items:center;gap:9px;max-width:650px;margin:0 auto;border:1px solid #c6c6c6;padding:5px 6px 5px 12px;background:#fff}
+.classic-search svg{color:#777;flex-shrink:0}
+.classic-search input{flex:1;min-width:0;border:0;outline:0;font-size:13px;padding:8px 2px;color:#222;background:transparent}
+.classic-search button{border:0;background:#c51d31;color:#fff;font-weight:800;padding:10px 20px;cursor:pointer}
+.classic-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 18px}
+.classic-shortcut{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;padding:13px 8px;color:#fff;font-size:15px;font-weight:800;border:1px solid #fff;min-height:48px}
+.classic-shortcut:hover{filter:brightness(.93);color:#fff}
+.classic-shortcut.red{background:#c51d31}.classic-shortcut.green{background:#218838}.classic-shortcut.blue{background:#0755a5}.classic-shortcut.orange{background:#ed7d16}.classic-shortcut.purple{background:#663ab7}.classic-shortcut.teal{background:#07877f}
+.classic-section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#c51d31;color:#fff;padding:11px 14px;font-size:17px;font-weight:800}
+.classic-section-title a{color:#fff;font-size:11px;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.classic-update-list{border:1px solid #d7d7d7;border-top:0;padding:3px 13px}
+.classic-update-list article{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-bottom:1px dotted #c9c9c9;font-size:13px;line-height:1.5}
+.classic-update-list article:last-child{border-bottom:0}
+.classic-update-list article>a{color:#0645ad;font-weight:700;flex:1}
+.classic-update-list article>a:hover,.classic-list-panel li a:hover,.classic-bottom-links a:hover{color:#c51d31;text-decoration:underline}
+.classic-update-list time{color:#666;font-size:10px;white-space:nowrap;padding-top:2px}
+.classic-dot{width:7px;height:7px;border-radius:50%;background:#c51d31;flex-shrink:0;margin-top:6px}
+.dot-result{background:#198754}.dot-admit-card{background:#0755a5}.dot-answer-key{background:#ed7d16}
+.classic-no-updates{border:1px solid #ddd;border-top:0;padding:18px;color:#555;font-size:13px;line-height:1.6}
+.classic-directory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px;align-items:stretch}
+.classic-list-panel{border:1px solid #c9c9c9;min-width:0;display:flex;flex-direction:column;background:#fff}
+.classic-list-panel h2{display:flex;align-items:center;justify-content:space-between;gap:6px;background:#f3f3f3;border-bottom:3px solid #c51d31;padding:11px 10px;margin:0;color:#111;font-size:17px;font-weight:800}
+.classic-list-panel h2 a{display:flex;align-items:center;gap:3px;color:#0645ad;font-size:10px;white-space:nowrap}
+.classic-list-panel ul{list-style:none;padding:6px 12px 10px;margin:0}
+.classic-list-panel li{position:relative;padding:8px 0 8px 13px;border-bottom:1px dotted #ddd;line-height:1.45}
+.classic-list-panel li:last-child{border-bottom:0}
+.classic-list-panel li:before{content:"";position:absolute;left:0;top:14px;width:6px;height:6px;background:#c51d31;border-radius:50%}
+.classic-list-panel li a{font-size:12px;color:#0645ad;font-weight:700}
+.classic-list-panel li small{display:block;color:#666;font-size:10px;margin-top:3px}
+.panel-tone-1 h2{border-color:#218838}.panel-tone-1 li:before{background:#218838}
+.panel-tone-2 h2{border-color:#0755a5}.panel-tone-2 li:before{background:#0755a5}
+.panel-tone-3 h2{border-color:#07877f}.panel-tone-3 li:before{background:#07877f}
+.panel-tone-4 h2{border-color:#ed7d16}.panel-tone-4 li:before{background:#ed7d16}
+.panel-tone-5 h2{border-color:#663ab7}.panel-tone-5 li:before{background:#663ab7}
+.classic-bottom-links{margin-top:18px;border:1px solid #ccc}
+.classic-bottom-links h2{margin:0;background:#222;color:#fff;font-size:16px;padding:11px 14px}
+.classic-bottom-links>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.classic-bottom-links a{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px;border-right:1px solid #eee;border-bottom:1px solid #eee;color:#0645ad;font-size:12px;font-weight:700}
+.classic-disclaimer{display:flex;align-items:flex-start;gap:8px;background:#f8f8f8;border:1px solid #ddd;padding:12px;margin:18px 0 0;color:#555;font-size:11px;line-height:1.6}
+.classic-disclaimer svg{flex-shrink:0;color:#198754}
+.classic-portal .footer{margin-top:0;border-radius:0}
+@media(max-width:760px){
+ .classic-portal .brand-row{min-height:112px}
+ .classic-portal .brand-icon{width:68px;height:68px;font-size:20px}
+ .classic-portal .brand-mark{gap:12px}
+ .classic-portal .brand-title{font-size:27px}
+ .classic-portal .brand-subtitle{font-size:8px;letter-spacing:.5px}
+ .classic-portal .nav-inner{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+ .classic-portal .nav-inner a{padding:11px 3px;font-size:11px;text-align:center}
+ .classic-directory{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .classic-list-panel h2{font-size:15px;padding:10px 8px}
+ .classic-list-panel li{padding:8px 0 8px 11px}
+ .classic-list-panel li a{font-size:11px}
+ .classic-list-panel ul{padding:5px 8px}
+ .classic-bottom-links>div{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:480px){
+ .classic-portal .brand-icon{width:55px;height:55px;font-size:17px}
+ .classic-portal .brand-title{font-size:21px}
+ .classic-portal .brand-subtitle{font-size:7px;letter-spacing:.2px}
+ .classic-portal .nav-inner{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .classic-ticker>strong{font-size:9px;padding:8px}
+ .ticker-track{font-size:11px}
+ .classic-intro{padding:17px 0 10px}
+ .classic-intro p{font-size:12px}
+ .classic-shortcuts{gap:6px}
+ .classic-shortcut{font-size:12px;padding:12px 5px;min-height:42px}
+ .classic-section-title{font-size:15px;padding:10px}
+ .classic-update-list{padding:2px 9px}
+ .classic-update-list article{gap:7px;font-size:12px}
+ .classic-update-list time{font-size:9px}
+ .classic-directory{grid-template-columns:1fr}
+ .classic-list-panel h2{font-size:16px}
+ .classic-list-panel li a{font-size:12px}
+ .classic-bottom-links>div{grid-template-columns:1fr}
+}
