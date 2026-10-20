@@ -56,7 +56,7 @@ async function fetchWithRetry(
             "ECONNRESET", "ETIMEDOUT", "EAI_AGAIN", "ENOTFOUND"].includes(code || ""));
       if (!retryable || attempt === attempts) throw error;
       console.warn("[crawler] transient network failure; retrying source", {
-        url, attempt, code: code || error instanceof Error ? (code || (error as Error).name) : "unknown",
+        url, attempt, code: code || (error instanceof Error ? error.name : "unknown"),
       });
       await new Promise((resolve) => setTimeout(resolve, 400 * attempt));
     }
