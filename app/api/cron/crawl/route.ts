@@ -32,6 +32,38 @@ function cleanText(input: string): string {
     .replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/\s+/g, " ").trim().slice(0, 400);
 }
 
+async function fetchWithRetry(
+  url: string,
+  init: Omit<RequestInit, "signal">,
+  timeoutMs = 12_000,
+  attempts = 2,
+): Promise<Response> {
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await fetch(url, { ...init, signal: AbortSignal.timeout(timeoutMs) });
+    } catch (error) {
+      lastError = error;
+      const withCause = error instanceof Error ? error as Error & { cause?: unknown; code?: unknown } : null;
+      const cause = withCause?.cause && typeof withCause.cause === "object"
+        ? withCause.cause as { code?: unknown }
+        : null;
+      const code = typeof cause?.code === "string" ? cause.code
+        : typeof withCause?.code === "string" ? withCause.code : null;
+      const retryable = error instanceof Error &&
+        (error.name === "TimeoutError" || error.name === "AbortError" ||
+          ["UND_ERR_CONNECT_TIMEOUT", "UND_ERR_HEADERS_TIMEOUT", "UND_ERR_SOCKET",
+            "ECONNRESET", "ETIMEDOUT", "EAI_AGAIN", "ENOTFOUND"].includes(code || ""));
+      if (!retryable || attempt === attempts) throw error;
+      console.warn("[crawler] transient network failure; retrying source", {
+        url, attempt, code: code || error instanceof Error ? (code || (error as Error).name) : "unknown",
+      });
+      await new Promise((resolve) => setTimeout(resolve, 400 * attempt));
+    }
+  }
+  throw lastError;
+}
+
 function describeCrawlerError(error: unknown): string {
   if (!(error instanceof Error)) return "Unknown non-Error failure";
 
@@ -112,9 +144,8 @@ export async function GET(request: NextRequest) {
     // Count every attempted source, including DNS/TLS/connection failures before a response exists.
     checked += 1;
     try {
-      const response = await fetch(source.listingUrl, {
+      const response = await fetchWithRetry(source.listingUrl, {
         redirect: "follow",
-        signal: AbortSignal.timeout(12_000),
         headers: { "user-agent": "AdarshResultBot/1.0 (+https://adarshresult.com; official-notice-monitor)", accept: "text/html,application/xhtml+xml" },
         cache: "no-store",
       });
