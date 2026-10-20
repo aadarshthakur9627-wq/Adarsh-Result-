@@ -253,3 +253,93 @@ body{background:#f7f8ff;color:#17203c}
  .classic-list-panel li a{font-size:12px}
  .classic-bottom-links>div{grid-template-columns:1fr}
 }
+
+
+/* Premium UX refinement: retain the requested portal flow, elevate finish and usability */
+.classic-portal{--portal-red:#c51d31;--portal-blue:#124caa;--portal-green:#16834a;--portal-line:#e1e5eb;background:#f7f8fb;color:#172033}
+.classic-portal .announcement{background:linear-gradient(90deg,#111827,#222b3b);color:#f1f5f9;border-bottom:1px solid #303847}
+.classic-portal .announcement-inner{min-height:36px;gap:12px}
+.classic-portal .announcement-inner>span:first-child{font-weight:800;letter-spacing:.15px}
+.classic-portal .announcement-inner svg{color:#ffc44e}
+.classic-portal .site-header{background:linear-gradient(180deg,#fff 0%,#fbfcff 100%);border-bottom:1px solid #e6e9ef}
+.classic-portal .brand-row{min-height:136px}
+.classic-portal .brand-mark{gap:19px}
+.classic-portal .brand-icon{width:82px;height:82px;border:4px solid #fff;outline:1px solid #d5dbe6;border-radius:24px;background:linear-gradient(145deg,#d9233d 0%,#a80f2b 54%,#263b82 100%);box-shadow:0 10px 24px #9e16301c, inset 0 1px #ffffff55;font-size:23px}
+.classic-portal .brand-title{font-size:clamp(29px,3.6vw,40px);letter-spacing:-.9px;background:linear-gradient(90deg,#b91832,#263b82);background-clip:text;-webkit-background-clip:text;color:transparent}
+.classic-portal .brand-title span{color:inherit}
+.classic-portal .brand-subtitle{font-size:9px;letter-spacing:1.35px;color:#657188;margin-top:8px}
+.classic-portal .navbar{position:sticky;top:0;z-index:20;background:#111827;border-bottom:3px solid #c51d31;box-shadow:0 6px 18px #1118271a}
+.classic-portal .nav-inner a{position:relative;padding:15px 17px;font-size:12px;transition:background .18s ease,color .18s ease}
+.classic-portal .nav-inner a:first-child,.classic-portal .nav-inner a:hover{background:#c51d31;color:#fff;border-bottom-color:#ffcf5a}
+.classic-portal .classic-main{padding-top:12px}
+.classic-portal .classic-ticker{border:1px solid #e0e4eb;border-radius:11px;background:#fff;box-shadow:0 3px 12px #19274408}
+.classic-portal .classic-ticker>strong{background:linear-gradient(120deg,#c51d31,#e33b4f);letter-spacing:.45px;padding:10px 15px}
+.classic-portal .ticker-track{color:#164e9d;font-size:12px}
+.classic-portal .classic-intro{padding:25px 12px 17px}
+.classic-portal .classic-intro h1{font-size:clamp(27px,3vw,35px);letter-spacing:-1px}
+.classic-portal .classic-intro h1 span{background:linear-gradient(90deg,#c51d31,#6b35a9);background-clip:text;-webkit-background-clip:text;color:transparent}
+.classic-portal .classic-intro p{font-size:13px;color:#596579;font-weight:600}
+.classic-portal .classic-search{border:1px solid #d5dce7;border-radius:13px;padding:5px 6px 5px 14px;box-shadow:0 8px 24px #15264a0c;transition:border-color .18s,box-shadow .18s}
+.classic-portal .classic-search:focus-within{border-color:#7b9de1;box-shadow:0 0 0 4px #2563eb12,0 8px 24px #15264a0c}
+.classic-portal .classic-search input{font-size:13px}
+.classic-portal .classic-search button{border-radius:9px;background:linear-gradient(120deg,#c51d31,#a6162d);padding:11px 22px;transition:transform .15s,filter .15s}
+.classic-portal .classic-search button:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.classic-portal .classic-shortcuts{gap:10px;margin:10px 0 20px}
+.classic-portal .classic-shortcut{position:relative;overflow:hidden;border:0;border-radius:11px;padding:14px 10px;box-shadow:0 5px 12px #18233b0d;transition:transform .18s,box-shadow .18s,filter .18s}
+.classic-portal .classic-shortcut:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,#ffffff20,transparent 55%);pointer-events:none}
+.classic-portal .classic-shortcut:hover{transform:translateY(-2px);box-shadow:0 9px 18px #18233b1a;filter:saturate(1.08)}
+.classic-portal .classic-shortcut.red{background:linear-gradient(110deg,#c51d31,#e33b4f)}
+.classic-portal .classic-shortcut.green{background:linear-gradient(110deg,#167a42,#28a35e)}
+.classic-portal .classic-shortcut.blue{background:linear-gradient(110deg,#104c9c,#2876ce)}
+.classic-portal .classic-shortcut.orange{background:linear-gradient(110deg,#dc6810,#f49b26)}
+.classic-portal .classic-shortcut.purple{background:linear-gradient(110deg,#6331a8,#8b5bd1)}
+.classic-portal .classic-shortcut.teal{background:linear-gradient(110deg,#087d76,#16a69b)}
+.classic-portal .classic-section-title{border-radius:10px 10px 0 0;background:linear-gradient(105deg,#b91832,#d52a42);box-shadow:0 4px 10px #b9183214;padding:12px 15px}
+.classic-portal .classic-latest{border-radius:11px;overflow:hidden;background:#fff;box-shadow:0 4px 18px #15264a08}
+.classic-portal .classic-update-list{background:#fff;padding:5px 15px;border-color:#e1e5ec}
+.classic-portal .classic-update-list article{padding:10px 1px;border-bottom-color:#e6e9ef}
+.classic-portal .classic-update-list article>a{color:#164e9d;font-size:12px}
+.classic-portal .classic-update-list article>a:hover{color:#c51d31}
+.classic-portal .classic-update-list time{background:#f2f4f8;padding:3px 6px;border-radius:5px;color:#657188}
+.classic-portal .classic-directory{gap:14px;margin-top:20px}
+.classic-portal .classic-list-panel{border:1px solid #e0e4eb;border-radius:11px;overflow:hidden;box-shadow:0 4px 15px #15264a07;transition:transform .18s,box-shadow .18s}
+.classic-portal .classic-list-panel:hover{transform:translateY(-2px);box-shadow:0 10px 24px #15264a10}
+.classic-portal .classic-list-panel h2{padding:13px 12px;background:linear-gradient(180deg,#fff,#f7f8fb);font-size:16px;border-bottom-width:3px}
+.classic-portal .classic-list-panel h2 a{padding:5px 7px;background:#fff;border:1px solid #e2e7ef;border-radius:6px}
+.classic-portal .classic-list-panel ul{padding:7px 13px 11px}
+.classic-portal .classic-list-panel li{padding:9px 0 9px 13px;border-bottom-color:#edf0f4}
+.classic-portal .classic-list-panel li:before{width:5px;height:5px;top:15px}
+.classic-portal .classic-list-panel li a{font-size:12px;line-height:1.55;color:#174f9b}
+.classic-portal .classic-list-panel li a:hover{color:#c51d31}
+.classic-portal .classic-bottom-links{border:1px solid #e0e4eb;border-radius:11px;overflow:hidden;box-shadow:0 4px 15px #15264a07}
+.classic-portal .classic-bottom-links h2{background:linear-gradient(100deg,#161e2d,#2b3444);padding:13px 15px}
+.classic-portal .classic-bottom-links a{padding:13px 14px;transition:background .15s}
+.classic-portal .classic-bottom-links a:hover{background:#f7f9fc}
+.classic-portal .classic-disclaimer{border:1px solid #e2e6ec;border-radius:10px;background:#fff;line-height:1.75}
+.classic-portal .footer{background:linear-gradient(120deg,#111827,#1f2937);border-top:3px solid #c51d31}
+.classic-portal .footer .brand-icon{width:44px;height:44px;border-radius:13px;font-size:14px;outline:0;border:0}
+.classic-portal .footer .brand-title{font-size:22px;color:#fff;background:none;-webkit-text-fill-color:#fff}
+.classic-portal .footer .brand-title span{color:#ffb8c1}
+.classic-portal .footer .brand-subtitle{color:#aeb9cc}
+.classic-portal .footer h3{color:#fff}
+.classic-portal .footer a:hover{color:#ffcf5a}
+.classic-portal .footer-bottom{border-top:1px solid #ffffff1b}
+@media(max-width:760px){
+ .classic-portal .brand-row{min-height:108px}
+ .classic-portal .brand-icon{width:65px;height:65px;border-radius:18px;font-size:19px}
+ .classic-portal .brand-title{font-size:27px}
+ .classic-portal .brand-subtitle{font-size:8px;letter-spacing:.55px}
+ .classic-portal .navbar{position:relative}
+ .classic-portal .nav-inner a{padding:12px 4px}
+ .classic-portal .classic-directory{gap:10px}
+ .classic-portal .classic-list-panel h2{font-size:14px}
+}
+@media(max-width:480px){
+ .classic-portal .brand-icon{width:54px;height:54px;border-radius:15px;font-size:16px}
+ .classic-portal .brand-title{font-size:22px}
+ .classic-portal .brand-subtitle{font-size:7px;letter-spacing:.1px}
+ .classic-portal .classic-ticker{border-radius:8px}
+ .classic-portal .classic-shortcut{border-radius:9px}
+ .classic-portal .classic-section-title{border-radius:8px 8px 0 0}
+}
+@media(prefers-reduced-motion:reduce){.classic-portal *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
