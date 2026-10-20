@@ -12,7 +12,7 @@ export const metadata: Metadata = {
  openGraph: { type: "website", siteName: "Adarsh Result", title: "Adarsh Result – Jobs, Results & Exam Updates", description: "Government job, result, admit card and answer key updates with official links.", url: siteUrl },
  robots: { index: true, follow: true }
 };
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#a51d3d" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#5b45df" };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
  return <html lang="en"><body>{children}</body></html>;
 }
